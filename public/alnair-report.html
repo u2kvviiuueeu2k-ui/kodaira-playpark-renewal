@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Alnair セキュリティ診断レポート</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme">
+  <style>
+    .reveal .slides section {
+      text-align: left;
+    }
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: #2d5a27;
+      text-transform: none;
+      font-weight: 800;
+    }
+    .reveal p, .reveal li {
+      font-size: 0.8em;
+      line-height: 1.6;
+      color: #444;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.5em;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .badge-primary { background: #2d5a27; }
+    .badge-warning { background: #d2691e; }
+    .highlight-box {
+      background: #fdfcf8;
+      border: 1px solid #e0e0e0;
+      border-left: 5px solid #2d5a27;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .highlight-box h4 {
+      margin-top: 0;
+      font-size: 0.8em;
+      color: #2d5a27;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1 -->
+      <section style="text-align: center;">
+        <h1 style="font-size: 2em; margin-bottom: 20px;">Alnair セキュリティ診断</h1>
+        <h3 style="color: #666; font-size: 1.2em;">対象: kodairaplaypark.com</h3>
+        <div style="margin-top: 50px;">
+          <span class="badge badge-primary">Confidential</span>
+        </div>
+        <p style="margin-top: 50px; font-size: 0.6em; color: #999;">矢印キー（→）で次のスライドへ</p>
+      </section>
+
+      <!-- Slide 2 -->
+      <section>
+        <h2>📊 1. 診断サマリー</h2>
+        <p>現在のWordPress環境（さくらインターネット）には、<strong>メールの到達率</strong>や<strong>Webセキュリティ</strong>の面でいくつかの「改善の余地（伸びしろ）」が見受けられました。</p>
+        
+        <div class="highlight-box">
+          <h4>💡 Alnairからのご提案</h4>
+          <p style="margin: 0; font-size: 0.9em;">現在進行中の<strong>Next.js (Vercel) 環境へのリニューアル</strong>により、これらの課題は自動的かつ劇的に解決されます！圧倒的な「安心感（Security Excellence）」を運営スタッフ・参加者の皆様に提供します。</p>
+        </div>
+      </section>
+
+      <!-- Slide 3 -->
+      <section>
+        <h2>📧 2. DNS・メール認証 (SPF)</h2>
+        <p><strong>対象ドメイン:</strong> <code>kodairaplaypark.com</code></p>
+        
+        <h3 style="font-size: 1em; margin-top: 30px;">SPF（なりすましメール対策 その1）</h3>
+        <ul>
+          <li><strong>現在の設定:</strong> <code>v=spf1 a:www673.sakura.ne.jp mx ~all</code></li>
+          <li><strong>診断結果:</strong> <span style="color: #d2691e; font-weight: bold;">🟡 改善の余地あり（Softfail）</span></li>
+        </ul>
+        
+        <div class="highlight-box">
+          <h4>⚠️ 解説と解決策</h4>
+          <p style="margin: 0; font-size: 0.9em;">末尾が <code>~all</code> となっており、「怪しいメールもとりあえず届ける」という緩い設定です。新システム稼働にあわせ、正規の送信元を整理し、より強固な <code>-all</code> (偽装メール完全拒否) への移行をサポートします。</p>
+        </div>
+      </section>
+
+      <!-- Slide 4 -->
+      <section>
+        <h2>📧 2. DNS・メール認証 (DMARC)</h2>
+        
+        <h3 style="font-size: 1em; margin-top: 30px;">DMARC（なりすましメール対策 その2）</h3>
+        <ul>
+          <li><strong>現在の設定:</strong> <code>v=DMARC1; p=none; aspf=r; adkim=r</code></li>
+          <li><strong>診断結果:</strong> <span style="color: #d2691e; font-weight: bold;">🟡 大きな改善のチャンス（監視モード）</span></li>
+        </ul>
+        
+        <div class="highlight-box">
+          <h4>⚠️ 解説と解決策</h4>
+          <p style="margin: 0; font-size: 0.9em;">ポリシーが <code>p=none</code> になっています。悪意のある第三者が団体を名乗ってメールを送ってもブロックされません。<br>今後は <code>p=quarantine</code> (隔離) や <code>p=reject</code> (拒否) といった強固な設定へのステップアップを行います。</p>
+        </div>
+      </section>
+
+      <!-- Slide 5 -->
+      <section>
+        <h2>🛡️ 3. HTTPセキュリティヘッダー</h2>
+        <p><strong>サーバー:</strong> <code>nginx</code></p>
+        
+        <h3 style="font-size: 1em; margin-top: 30px;">現在の弱点（設定の不在）</h3>
+        <ul>
+          <li>❌ <strong>HSTS がない</strong>: 古い端末等で安全でない通信にダウングレードされるリスク。</li>
+          <li>❌ <strong>CSP がない</strong>: 悪意のあるプログラムが外部から読み込まれるリスク（WPでは特に重要）。</li>
+          <li>❌ <strong>X-Frame-Options がない</strong>: 別の悪意あるサイトの中に「透明なボタン」として埋め込まれるリスク。</li>
+        </ul>
+      </section>
+
+      <!-- Slide 6 -->
+      <section>
+        <h2>🚀 4. Alnairの「Security Excellence」</h2>
+        <p>現在のWordPress環境でセキュリティを守ろうとすると、専門プラグインの導入や複雑な設定管理が必要になり、<strong>スタッフの大きな負担（泥臭い作業）</strong>となります。</p>
+        
+        <div class="highlight-box" style="border-left-color: #4a7c41;">
+          <h4 style="color: #4a7c41;">✅ 解決策（Next.js + Vercel による新環境）</h4>
+          <p style="margin: 0; font-size: 0.9em;">現在構築している「デジタル冒険基地」では、<strong>これらの防御盾が「最初から全自動で」装備</strong>されます！Vercelの最新ネットワークにより、HSTSや高度なセキュリティヘッダーが標準で組み込まれます。</p>
+        </div>
+        
+        <p style="margin-top: 30px; font-weight: bold; color: #2d5a27; font-size: 0.9em; text-align: center;">
+          今回のリニューアルは「見た目をワクワクさせる」だけでなく、<br>
+          「裏側の見えない不安や管理の手間を完全に消し去る」真のアップデートです！
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true
+    });
+  </script>
+</body>
+</html>
