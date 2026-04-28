@@ -2,49 +2,147 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>Alnair セキュリティ診断レポート</title>
+  <title>Alnair 総合診断レポート | kodairaplaypark.com</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Reveal.js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <style>
+    :root {
+      --alnair-bg: #0a0a0c;
+      --alnair-surface: #141418;
+      --alnair-primary: #00ffcc;
+      --alnair-accent: #ff3366;
+      --alnair-text: #ffffff;
+      --alnair-muted: #888899;
+    }
+    
+    body {
+      background-color: var(--alnair-bg);
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: var(--alnair-text);
+    }
+    
+    .reveal {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: var(--alnair-text);
+    }
+    
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      text-transform: none;
+      color: var(--alnair-text);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    
+    .reveal .controls { color: var(--alnair-primary); }
+    .reveal .progress { color: var(--alnair-primary); height: 4px; }
+    
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(20, 20, 24, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .glass-card-glow {
+      box-shadow: 0 0 40px rgba(0, 255, 204, 0.15), inset 0 0 20px rgba(0, 255, 204, 0.05);
+      border: 1px solid rgba(0, 255, 204, 0.3);
+    }
+    
+    /* Ranking Badges */
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      font-size: 2.5rem;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .rank-s { background: linear-gradient(135deg, #00ffcc, #0099ff); color: #000; box-shadow: 0 0 30px rgba(0,255,204,0.4); }
+    .rank-a { background: linear-gradient(135deg, #33ff99, #00cc66); color: #000; }
+    .rank-b { background: linear-gradient(135deg, #ffff00, #ffcc00); color: #000; }
+    .rank-c { background: linear-gradient(135deg, #ff9933, #ff6600); color: #fff; }
+    .rank-d { background: linear-gradient(135deg, #ff3366, #cc0033); color: #fff; box-shadow: 0 0 30px rgba(255,51,102,0.4); }
+    .rank-e { background: linear-gradient(135deg, #990000, #660000); color: #fff; }
+    
+    /* Gradients */
+    .text-gradient {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(135deg, #ffffff, #888899);
+    }
+    .text-gradient-primary {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(135deg, #00ffcc, #0099ff);
+    }
+    .text-gradient-danger {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(135deg, #ff3366, #ff9933);
+    }
+    
+    /* Layout Overrides for Reveal */
     .reveal .slides section {
       text-align: left;
+      height: 100%;
+      padding: 0 !important;
     }
-    .reveal h1, .reveal h2, .reveal h3 {
-      color: #2d5a27;
-      text-transform: none;
-      font-weight: 800;
+    
+    .slide-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+      box-sizing: border-box;
     }
-    .reveal p, .reveal li {
-      font-size: 0.8em;
-      line-height: 1.6;
-      color: #444;
+    
+    /* Score Bar */
+    .score-bar-bg {
+      width: 100%;
+      height: 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 10px;
     }
-    .badge {
-      display: inline-block;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 0.5em;
-      font-weight: bold;
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .badge-primary { background: #2d5a27; }
-    .badge-warning { background: #d2691e; }
-    .highlight-box {
-      background: #fdfcf8;
-      border: 1px solid #e0e0e0;
-      border-left: 5px solid #2d5a27;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    .highlight-box h4 {
-      margin-top: 0;
-      font-size: 0.8em;
-      color: #2d5a27;
+    
+    /* Custom Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
     }
   </style>
 </head>
@@ -52,87 +150,242 @@
   <div class="reveal">
     <div class="slides">
 
-      <!-- Slide 1 -->
-      <section style="text-align: center;">
-        <h1 style="font-size: 2em; margin-bottom: 20px;">Alnair セキュリティ診断</h1>
-        <h3 style="color: #666; font-size: 1.2em;">対象: kodairaplaypark.com</h3>
-        <div style="margin-top: 50px;">
-          <span class="badge badge-primary">Confidential</span>
-        </div>
-        <p style="margin-top: 50px; font-size: 0.6em; color: #999;">矢印キー（→）で次のスライドへ</p>
-      </section>
-
-      <!-- Slide 2 -->
-      <section>
-        <h2>📊 1. 診断サマリー</h2>
-        <p>現在のWordPress環境（さくらインターネット）には、<strong>メールの到達率</strong>や<strong>Webセキュリティ</strong>の面でいくつかの「改善の余地（伸びしろ）」が見受けられました。</p>
-        
-        <div class="highlight-box">
-          <h4>💡 Alnairからのご提案</h4>
-          <p style="margin: 0; font-size: 0.9em;">現在進行中の<strong>Next.js (Vercel) 環境へのリニューアル</strong>により、これらの課題は自動的かつ劇的に解決されます！圧倒的な「安心感（Security Excellence）」を運営スタッフ・参加者の皆様に提供します。</p>
-        </div>
-      </section>
-
-      <!-- Slide 3 -->
-      <section>
-        <h2>📧 2. DNS・メール認証 (SPF)</h2>
-        <p><strong>対象ドメイン:</strong> <code>kodairaplaypark.com</code></p>
-        
-        <h3 style="font-size: 1em; margin-top: 30px;">SPF（なりすましメール対策 その1）</h3>
-        <ul>
-          <li><strong>現在の設定:</strong> <code>v=spf1 a:www673.sakura.ne.jp mx ~all</code></li>
-          <li><strong>診断結果:</strong> <span style="color: #d2691e; font-weight: bold;">🟡 改善の余地あり（Softfail）</span></li>
-        </ul>
-        
-        <div class="highlight-box">
-          <h4>⚠️ 解説と解決策</h4>
-          <p style="margin: 0; font-size: 0.9em;">末尾が <code>~all</code> となっており、「怪しいメールもとりあえず届ける」という緩い設定です。新システム稼働にあわせ、正規の送信元を整理し、より強固な <code>-all</code> (偽装メール完全拒否) への移行をサポートします。</p>
+      <!-- Slide 1: Title -->
+      <section data-background-color="#0a0a0c">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div style="margin-bottom: 40px;">
+            <span class="px-6 py-2 rounded-full border border-[#00ffcc]/30 bg-[#00ffcc]/10 text-[#00ffcc] text-sm tracking-widest uppercase font-bold shadow-[0_0_20px_rgba(0,255,204,0.2)]">
+              Strictly Confidential
+            </span>
+          </div>
+          <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight text-white">
+            Architecture & Security <br/>
+            <span class="text-gradient-primary">Diagnostic Report</span>
+          </h1>
+          <p class="text-2xl text-[#888899] mb-12">Client: kodairaplaypark.com</p>
+          
+          <div class="flex gap-12 mt-12 pt-12 border-t border-white/10">
+            <div>
+              <p class="text-sm text-[#888899] uppercase tracking-wider mb-2">Analyzed By</p>
+              <p class="text-xl font-bold">Alnair LLC.</p>
+            </div>
+            <div>
+              <p class="text-sm text-[#888899] uppercase tracking-wider mb-2">Date</p>
+              <p class="text-xl font-bold">April 2026</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Slide 4 -->
-      <section>
-        <h2>📧 2. DNS・メール認証 (DMARC)</h2>
-        
-        <h3 style="font-size: 1em; margin-top: 30px;">DMARC（なりすましメール対策 その2）</h3>
-        <ul>
-          <li><strong>現在の設定:</strong> <code>v=DMARC1; p=none; aspf=r; adkim=r</code></li>
-          <li><strong>診断結果:</strong> <span style="color: #d2691e; font-weight: bold;">🟡 大きな改善のチャンス（監視モード）</span></li>
-        </ul>
-        
-        <div class="highlight-box">
-          <h4>⚠️ 解説と解決策</h4>
-          <p style="margin: 0; font-size: 0.9em;">ポリシーが <code>p=none</code> になっています。悪意のある第三者が団体を名乗ってメールを送ってもブロックされません。<br>今後は <code>p=quarantine</code> (隔離) や <code>p=reject</code> (拒否) といった強固な設定へのステップアップを行います。</p>
+      <!-- Slide 2: Overall Score -->
+      <section data-background-color="#0a0a0c">
+        <div class="slide-content">
+          <h2 class="text-4xl mb-12 border-b border-white/10 pb-6">1. 総合評価サマリー (Overall Score)</h2>
+          
+          <div class="grid-2">
+            <!-- Left: Overall Score -->
+            <div class="glass-card flex flex-col items-center text-center">
+              <h3 class="text-2xl text-[#888899] mb-6">現行システムの総合評価</h3>
+              <div class="rank-badge rank-d mb-6" style="width: 120px; height: 120px; font-size: 4rem;">D</div>
+              <div class="text-7xl font-black mb-2">38<span class="text-3xl text-[#888899]">/100</span></div>
+              <p class="text-[#ff3366] font-bold tracking-widest mt-4 uppercase">Needs Immediate Action</p>
+              <p class="mt-6 text-[#888899] text-sm leading-relaxed">
+                現在のWordPress / さくらインターネット環境は、レガシーなインフラに起因する重大なセキュリティリスクと、ブランド価値を損なうパフォーマンスの課題を抱えています。
+              </p>
+            </div>
+            
+            <!-- Right: Breakdown -->
+            <div class="glass-card">
+              <h3 class="text-2xl mb-8">部門別スコア</h3>
+              
+              <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                  <span class="font-bold">メール認証・DNSセキュリティ</span>
+                  <span class="text-xl font-black text-[#ff3366]">E (20/100)</span>
+                </div>
+                <div class="score-bar-bg"><div class="score-bar-fill" style="width: 20%; background: #ff3366;"></div></div>
+                <p class="text-xs text-[#888899] mt-2">なりすまし対策が極めて不十分。迷惑メール判定リスク大。</p>
+              </div>
+
+              <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                  <span class="font-bold">Webセキュリティ (HTTPヘッダー)</span>
+                  <span class="text-xl font-black text-[#ff9933]">D (30/100)</span>
+                </div>
+                <div class="score-bar-bg"><div class="score-bar-fill" style="width: 30%; background: #ff9933;"></div></div>
+                <p class="text-xs text-[#888899] mt-2">HSTSやCSP等の現代の必須防御層が欠落。</p>
+              </div>
+
+              <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                  <span class="font-bold">UI/UX & パフォーマンス</span>
+                  <span class="text-xl font-black text-[#ffff00]">C (65/100)</span>
+                </div>
+                <div class="score-bar-bg"><div class="score-bar-fill" style="width: 65%; background: #ffcc00;"></div></div>
+                <p class="text-xs text-[#888899] mt-2">WP特有のモッサリ感。没入感を生む最新のインタラクション設計が不在。</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Slide 5 -->
-      <section>
-        <h2>🛡️ 3. HTTPセキュリティヘッダー</h2>
-        <p><strong>サーバー:</strong> <code>nginx</code></p>
-        
-        <h3 style="font-size: 1em; margin-top: 30px;">現在の弱点（設定の不在）</h3>
-        <ul>
-          <li>❌ <strong>HSTS がない</strong>: 古い端末等で安全でない通信にダウングレードされるリスク。</li>
-          <li>❌ <strong>CSP がない</strong>: 悪意のあるプログラムが外部から読み込まれるリスク（WPでは特に重要）。</li>
-          <li>❌ <strong>X-Frame-Options がない</strong>: 別の悪意あるサイトの中に「透明なボタン」として埋め込まれるリスク。</li>
-        </ul>
+      <!-- Slide 3: Email Security -->
+      <section data-background-color="#0a0a0c">
+        <div class="slide-content">
+          <div class="flex items-center gap-4 mb-12 border-b border-white/10 pb-6">
+            <div class="rank-badge rank-e" style="width: 60px; height: 60px; font-size: 2rem;">E</div>
+            <h2 class="text-4xl m-0">2. DNS・メール認証の脆弱性</h2>
+          </div>
+          
+          <div class="grid-2">
+            <div>
+              <h3 class="text-2xl text-[#ff3366] mb-4">現状の致命的な課題</h3>
+              <p class="text-[#888899] mb-8 leading-relaxed">
+                SPF設定が <code>~all</code> (Softfail) となっており、DMARCも <code>p=none</code> (監視のみ) です。<br><br>
+                これは**「玄関の鍵を開けっぱなしにして防犯カメラだけ付けている状態」**に等しく、悪意ある第三者が『こだいら自由遊びの会』を名乗ってフィッシングメールを送信しても、受信者側でブロックする仕組みが機能しません。
+              </p>
+              
+              <div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl mb-6">
+                <h4 class="text-red-400 text-sm uppercase tracking-wider mb-2">リスクレベル: 極大</h4>
+                <ul class="list-disc pl-5 text-sm text-[#888899] space-y-2">
+                  <li>団体名義でのなりすましメールによる信用失墜</li>
+                  <li>Gmail等のセキュリティ基準厳格化による、正規メールの「迷惑メールボックス直行」</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="glass-card glass-card-glow">
+              <h3 class="text-xl text-[#00ffcc] mb-6">Alnairの「Masterpiece」ソリューション</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-bold text-white mb-2">1. SPFの厳格化 (-all)</h4>
+                  <p class="text-sm text-[#888899]">新インフラに合わせて正規の送信元を特定し、不正な送信元をシステムレベルで完全拒否するStrictfail設定へ移行。</p>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white mb-2">2. DMARCポリシーの強制 (p=reject)</h4>
+                  <p class="text-sm text-[#888899]">ブランド毀損を防ぐため、認証に失敗したなりすましメールを確実にドロップするゼロトラストなメール環境の構築。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- Slide 6 -->
-      <section>
-        <h2>🚀 4. Alnairの「Security Excellence」</h2>
-        <p>現在のWordPress環境でセキュリティを守ろうとすると、専門プラグインの導入や複雑な設定管理が必要になり、<strong>スタッフの大きな負担（泥臭い作業）</strong>となります。</p>
-        
-        <div class="highlight-box" style="border-left-color: #4a7c41;">
-          <h4 style="color: #4a7c41;">✅ 解決策（Next.js + Vercel による新環境）</h4>
-          <p style="margin: 0; font-size: 0.9em;">現在構築している「デジタル冒険基地」では、<strong>これらの防御盾が「最初から全自動で」装備</strong>されます！Vercelの最新ネットワークにより、HSTSや高度なセキュリティヘッダーが標準で組み込まれます。</p>
+      <!-- Slide 4: Web Security -->
+      <section data-background-color="#0a0a0c">
+        <div class="slide-content">
+          <div class="flex items-center gap-4 mb-12 border-b border-white/10 pb-6">
+            <div class="rank-badge rank-d" style="width: 60px; height: 60px; font-size: 2rem;">D</div>
+            <h2 class="text-4xl m-0">3. Webセキュリティヘッダーの欠落</h2>
+          </div>
+          
+          <div class="grid-2">
+            <div class="glass-card border-[#ff9933]/30">
+              <h3 class="text-2xl text-[#ff9933] mb-6">診断結果：丸腰のWebサーバー</h3>
+              <p class="text-[#888899] mb-6 text-sm">
+                現在のNginxサーバーには、現代のWebアプリケーションに必須とされる「セキュリティ・ヘッダー（防御盾）」が一切設定されていません。
+              </p>
+              <ul class="space-y-4">
+                <li class="flex items-start gap-3 border-b border-white/5 pb-4">
+                  <span class="text-[#ff3366] font-bold mt-1">✕</span>
+                  <div>
+                    <span class="font-bold text-white block">HSTS (HTTP Strict Transport Security)</span>
+                    <span class="text-xs text-[#888899]">安全でないHTTP通信を強制的に遮断する機構が不在。</span>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3 border-b border-white/5 pb-4">
+                  <span class="text-[#ff3366] font-bold mt-1">✕</span>
+                  <div>
+                    <span class="font-bold text-white block">CSP (Content Security Policy)</span>
+                    <span class="text-xs text-[#888899]">外部からの悪意あるスクリプト(XSS)実行を防ぐ防波堤が不在。WordPress環境においては致命的。</span>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-[#ff3366] font-bold mt-1">✕</span>
+                  <div>
+                    <span class="font-bold text-white block">X-Frame-Options</span>
+                    <span class="text-xs text-[#888899]">クリックジャッキング攻撃に対する防御が不在。</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="text-2xl text-[#00ffcc] mb-4">次世代エッジネットワークへの移行</h3>
+              <p class="text-[#888899] mb-8 leading-relaxed">
+                これらをWordPress環境で手動構築・維持することは、運営スタッフにとって「泥臭い・非生産的」な作業の極みです。
+              </p>
+              <div class="glass-card glass-card-glow p-6">
+                <p class="text-white font-bold mb-4">【Vercel Edge Network 自動防壁】</p>
+                <p class="text-sm text-[#888899]">
+                  Alnairが構築するNext.jsアーキテクチャでは、上記のエンタープライズレベルの防御ヘッダーが<span class="text-[#00ffcc] font-bold">デプロイと同時に全自動で適用</span>されます。管理ゼロで最高の安全性を担保します。
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <p style="margin-top: 30px; font-weight: bold; color: #2d5a27; font-size: 0.9em; text-align: center;">
-          今回のリニューアルは「見た目をワクワクさせる」だけでなく、<br>
-          「裏側の見えない不安や管理の手間を完全に消し去る」真のアップデートです！
-        </p>
+      </section>
+
+      <!-- Slide 5: The Transformation -->
+      <section data-background-color="#0a0a0c">
+        <div class="slide-content text-center">
+          <h2 class="text-5xl font-black mb-8 text-gradient-primary">
+            From Legacy To Masterpiece
+          </h2>
+          <p class="text-xl text-[#888899] mb-16 max-w-3xl mx-auto">
+            リニューアル後のAlnairアーキテクチャがもたらす圧倒的な進化。
+          </p>
+          
+          <div class="flex items-center justify-center gap-8 w-full max-w-4xl mx-auto">
+            <!-- Before -->
+            <div class="flex-1 bg-white/5 border border-white/10 rounded-3xl p-8 opacity-50 grayscale">
+              <h3 class="text-lg font-bold text-white mb-4">WordPress (Current)</h3>
+              <div class="rank-badge rank-d mx-auto mb-6">D</div>
+              <ul class="text-sm text-left text-[#888899] space-y-2">
+                <li>• プラグイン依存の脆弱な設計</li>
+                <li>• ページ遷移ごとの遅延・再読み込み</li>
+                <li>• 運営の管理負担（アプデ・保守）が大</li>
+                <li>• 平凡でテンプレート的なデザイン</li>
+              </ul>
+            </div>
+            
+            <!-- Arrow -->
+            <div class="text-[#00ffcc] text-4xl font-bold animate-pulse">➔</div>
+            
+            <!-- After -->
+            <div class="flex-1 glass-card glass-card-glow p-8 transform scale-110 relative z-10">
+              <div class="absolute -top-4 -right-4 bg-[#00ffcc] text-black text-xs font-bold px-3 py-1 rounded-full animate-bounce">
+                NEW
+              </div>
+              <h3 class="text-lg font-bold text-[#00ffcc] mb-4">Next.js + Vercel (Alnair)</h3>
+              <div class="rank-badge rank-s mx-auto mb-6">S</div>
+              <ul class="text-sm text-left text-white space-y-3">
+                <li class="flex items-center gap-2"><span class="text-[#00ffcc]">✓</span> 堅牢なエッジセキュリティ</li>
+                <li class="flex items-center gap-2"><span class="text-[#00ffcc]">✓</span> 0秒遷移のシームレスな体験</li>
+                <li class="flex items-center gap-2"><span class="text-[#00ffcc]">✓</span> サーバー管理ゼロの自動運用</li>
+                <li class="flex items-center gap-2"><span class="text-[#00ffcc]">✓</span> 感性を揺さぶるシネマティックUI</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Slide 6: Conclusion -->
+      <section data-background-color="#0a0a0c">
+        <div class="slide-content text-center" style="align-items: center;">
+          <h2 class="text-6xl font-black mb-10 text-white">
+            Security Excellence & <br>
+            <span class="text-gradient-primary">Unmatched Aesthetics.</span>
+          </h2>
+          <p class="text-2xl text-[#888899] mb-16 max-w-4xl leading-relaxed">
+            セキュリティの不安をシステムが完全に吸収し、<br>
+            スタッフは「子どもたちの遊び」だけに100%集中できる環境を。
+          </p>
+          <div class="glass-card glass-card-glow inline-block p-8 border-[#00ffcc]/50">
+            <h3 class="text-3xl text-[#00ffcc] font-bold mb-2">Proposal Accepted</h3>
+            <p class="text-sm text-white/70">Development in Progress by Alnair LLC.</p>
+          </div>
+        </div>
       </section>
 
     </div>
@@ -142,10 +395,14 @@
   <script>
     Reveal.initialize({
       hash: true,
-      transition: 'slide',
+      transition: 'fade', // スムーズなフェードトランジション
+      transitionSpeed: 'slow',
       controls: true,
       progress: true,
-      center: true
+      center: false,
+      width: 1200,
+      height: 800,
+      margin: 0,
     });
   </script>
 </body>
