@@ -20,7 +20,7 @@ const Navbar = () => {
     { name: 'プレーパークとは', href: '/about', icon: <Tent size={18} /> },
     { name: '作品ギャラリー', href: '/gallery', icon: <Palette size={18} /> },
     { name: 'ボランティア', href: '/volunteer', icon: <Heart size={18} /> },
-    { name: 'アクセス', href: '/access', icon: <Map size={18} /> },
+    { name: 'アクセス', href: '/access', icon: <MapIcon size={18} /> },
     { name: '私たちについて', href: '/members', icon: <Info size={18} /> },
   ];
 
