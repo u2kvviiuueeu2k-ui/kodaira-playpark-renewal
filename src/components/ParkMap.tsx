@@ -4,7 +4,17 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame, Tent, TreePine, Coffee, Hammer, Info } from 'lucide-react';
 
-const MapPoint = ({ x, y, icon, label, description, activePoint, setActivePoint }: any) => {
+type MapPointProps = {
+  x: number;
+  y: number;
+  icon: React.ReactNode;
+  label: string;
+  description: string;
+  activePoint: string | null;
+  setActivePoint: (label: string | null) => void;
+};
+
+const MapPoint = ({ x, y, icon, label, description, activePoint, setActivePoint }: MapPointProps) => {
   const isActive = activePoint === label;
 
   return (
@@ -42,7 +52,7 @@ const MapPoint = ({ x, y, icon, label, description, activePoint, setActivePoint 
 };
 
 const ParkMap = () => {
-  const [activePoint, setActivePoint] = useState(null);
+  const [activePoint, setActivePoint] = useState<string | null>(null);
 
   const points = [
     { x: 30, y: 40, icon: <Flame size={20} />, label: "焚き火場", description: "冬でも暖かく、焼き芋やおやつ作りが楽しめます。" },

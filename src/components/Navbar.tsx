@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Tent, Map, Calendar, Info } from 'lucide-react';
+import { Menu, X, Tent, Map as MapIcon, Info, Palette, Heart } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
