@@ -19,9 +19,13 @@
   
   <style>
     :root {
-      --bg-color: #0a0a0c;
-      --text-color: #ffffff;
-      --accent-color: #00ffcc;
+      --bg-color: #FDFCF8; /* Warm Off-white / Paper */
+      --text-color: #2c3e2d; /* Deep Forest Dark */
+      --text-muted: #5c6c5d; 
+      --primary-color: #2d5a27; /* Forest Green */
+      --accent-color: #d2691e; /* Campfire Orange */
+      --card-bg: #ffffff;
+      --border-color: rgba(45, 90, 39, 0.1);
     }
     
     body, .reveal {
@@ -37,11 +41,11 @@
       line-height: 1.6;
     }
     
-    .reveal h1 { font-weight: 900; font-size: 3.5rem; letter-spacing: 0.05em; }
-    .reveal h2 { font-weight: 900; font-size: 2.5rem; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 40px; }
-    .reveal h3 { font-weight: 700; font-size: 1.75rem; margin-bottom: 20px; color: var(--accent-color); }
+    .reveal h1 { font-weight: 900; font-size: 3.5rem; letter-spacing: 0.05em; color: var(--primary-color); }
+    .reveal h2 { font-weight: 900; font-size: 2.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 40px; color: var(--primary-color); }
+    .reveal h3 { font-weight: 700; font-size: 1.75rem; margin-bottom: 20px; color: var(--primary-color); }
     
-    .reveal .controls { color: var(--accent-color); }
+    .reveal .controls { color: var(--primary-color); }
     .reveal .progress { color: var(--accent-color); height: 4px; }
     
     /* Layout */
@@ -64,16 +68,17 @@
     
     /* Elegant Cards */
     .card {
-      background: rgba(30, 30, 35, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
       padding: 35px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 40px rgba(45, 90, 39, 0.08);
     }
     
     .card-highlight {
-      border: 1px solid rgba(0, 255, 204, 0.4);
-      box-shadow: 0 0 30px rgba(0, 255, 204, 0.1);
+      background: linear-gradient(180deg, #ffffff 0%, #f4fbf4 100%);
+      border: 2px solid rgba(45, 90, 39, 0.2);
+      box-shadow: 0 15px 40px rgba(45, 90, 39, 0.12);
     }
     
     /* Ranking Elements */
@@ -83,25 +88,24 @@
       justify-content: center;
       border-radius: 50%;
       font-weight: 900;
-      color: #000;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
-    .bg-rank-s { background: #00ffcc; }
-    .bg-rank-d { background: #ff3366; color: #fff; }
+    .bg-rank-s { background: #2d5a27; color: white; }
+    .bg-rank-d { background: #d2691e; color: white; }
     
     .score-bar {
       width: 100%;
-      height: 8px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 4px;
+      height: 10px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 5px;
       overflow: hidden;
       margin-top: 8px;
     }
     
     /* Text Utilities */
-    .text-highlight { color: #00ffcc; font-weight: bold; }
-    .text-warning { color: #ff3366; font-weight: bold; }
-    .text-muted { color: #9999aa; }
+    .text-highlight { color: var(--primary-color); font-weight: bold; }
+    .text-warning { color: var(--accent-color); font-weight: bold; }
+    .text-muted { color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -111,22 +115,22 @@
       <!-- Slide 1: Title -->
       <section>
         <div class="slide-wrapper" style="align-items: center; text-align: center;">
-          <div class="mb-10 inline-block px-5 py-2 rounded-full border border-white/20 bg-white/5 text-sm tracking-widest text-white/80">
+          <div class="mb-10 inline-block px-5 py-2 rounded-full border border-[rgba(45,90,39,0.3)] bg-[rgba(45,90,39,0.05)] text-sm tracking-widest text-[#2d5a27] font-bold">
             現状分析・ご提案資料
           </div>
           <h1 class="mb-8 leading-tight">
             サイト安全性・使いやすさ<br/>診断レポート
           </h1>
-          <p class="text-2xl text-muted mb-16">こだいら自由遊びの会 様</p>
+          <p class="text-2xl text-muted mb-16 font-bold">こだいら自由遊びの会 様</p>
           
-          <div class="mt-16 pt-8 border-t border-white/10 flex gap-16 justify-center w-full max-w-lg">
+          <div class="mt-16 pt-8 border-t border-[rgba(45,90,39,0.1)] flex gap-16 justify-center w-full max-w-lg">
             <div>
-              <p class="text-sm text-muted mb-1">作成</p>
-              <p class="text-lg font-bold">合同会社Alnair</p>
+              <p class="text-sm text-muted mb-1 uppercase tracking-wider">作成</p>
+              <p class="text-lg font-bold text-[#2d5a27]">合同会社Alnair</p>
             </div>
             <div>
-              <p class="text-sm text-muted mb-1">日付</p>
-              <p class="text-lg font-bold">2026年4月</p>
+              <p class="text-sm text-muted mb-1 uppercase tracking-wider">日付</p>
+              <p class="text-lg font-bold text-[#2d5a27]">2026年4月</p>
             </div>
           </div>
         </div>
@@ -140,44 +144,45 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             
             <!-- Left: Score -->
-            <div class="card flex flex-col items-center text-center">
-              <h3 class="!text-white !mb-6">現在の状態：早急な修繕が必要な遊び場</h3>
+            <div class="card flex flex-col items-center text-center relative overflow-hidden">
+              <div class="absolute top-0 w-full h-2 bg-[#d2691e]"></div>
+              <h3 class="!text-[#2c3e2d] !mb-6 !mt-2">現在の状態：早急な修繕が必要な遊び場</h3>
               <div class="rank-circle bg-rank-d w-28 h-28 text-5xl mb-6">D</div>
-              <div class="text-6xl font-black mb-2">38<span class="text-3xl text-muted">/100点</span></div>
-              <p class="text-warning text-lg mt-4">早急なインフラ修繕が推奨されます</p>
-              <p class="mt-6 text-muted text-sm text-left">
+              <div class="text-6xl font-black mb-2 text-[#d2691e]">38<span class="text-3xl text-muted">/100点</span></div>
+              <p class="text-warning text-lg mt-4 bg-[#d2691e]/10 px-4 py-1 rounded-full">早急なインフラ修繕が推奨されます</p>
+              <p class="mt-6 text-muted text-sm text-left leading-relaxed">
                 現在のシステム（WordPress）は、古い遊具を継ぎ接ぎして使っているような状態です。見えないところで防犯上の死角が多く、保護者や子どもたちを安全に迎え入れるには不安が残ります。
               </p>
             </div>
             
             <!-- Right: Breakdown -->
             <div class="card">
-              <h3 class="!text-white !mb-8 !text-xl">項目別の診断スコア</h3>
+              <h3 class="!text-[#2c3e2d] !mb-8 !text-xl border-b border-[rgba(0,0,0,0.05)] pb-4">項目別の診断スコア</h3>
               
               <div class="mb-8">
                 <div class="flex justify-between items-end mb-1">
-                  <span class="font-bold text-lg">保護者への連絡網（メール安全性）</span>
-                  <span class="text-xl font-black text-warning">20点</span>
+                  <span class="font-bold text-lg text-[#2c3e2d]">保護者への連絡網（メール安全性）</span>
+                  <span class="text-xl font-black text-[#d2691e]">20点</span>
                 </div>
-                <div class="score-bar"><div class="h-full bg-rank-d" style="width: 20%;"></div></div>
+                <div class="score-bar"><div class="h-full bg-[#d2691e]" style="width: 20%;"></div></div>
                 <p class="text-xs text-muted mt-2">なりすまし対策が不十分。大事な案内が迷惑メールに入りやすい状態です。</p>
               </div>
 
               <div class="mb-8">
                 <div class="flex justify-between items-end mb-1">
-                  <span class="font-bold text-lg">サイトの防犯設備（Webセキュリティ）</span>
-                  <span class="text-xl font-black text-orange-400">30点</span>
+                  <span class="font-bold text-lg text-[#2c3e2d]">サイトの防犯設備（Webセキュリティ）</span>
+                  <span class="text-xl font-black text-[#d2691e]/80">30点</span>
                 </div>
-                <div class="score-bar"><div class="h-full bg-orange-400" style="width: 30%;"></div></div>
+                <div class="score-bar"><div class="h-full bg-[#d2691e]/80" style="width: 30%;"></div></div>
                 <p class="text-xs text-muted mt-2">悪意あるアクセスを防ぐ「見えないフェンス」が張られていません。</p>
               </div>
 
               <div>
                 <div class="flex justify-between items-end mb-1">
-                  <span class="font-bold text-lg">見やすさ・使いやすさ（UI/UX）</span>
-                  <span class="text-xl font-black text-yellow-400">65点</span>
+                  <span class="font-bold text-lg text-[#2c3e2d]">見やすさ・使いやすさ（UI/UX）</span>
+                  <span class="text-xl font-black text-[#2d5a27]/60">65点</span>
                 </div>
-                <div class="score-bar"><div class="h-full bg-yellow-400" style="width: 65%;"></div></div>
+                <div class="score-bar"><div class="h-full bg-[#2d5a27]/60" style="width: 65%;"></div></div>
                 <p class="text-xs text-muted mt-2">動きが少し重く、現代のスマートフォン利用者に最適化しきれていません。</p>
               </div>
             </div>
@@ -194,13 +199,13 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
               <h3 class="text-warning mb-4">現状：誰の手紙でも受け取ってしまうポスト</h3>
-              <p class="text-muted mb-6 text-sm">
+              <p class="text-muted mb-6 text-sm leading-relaxed">
                 現在のシステムは、メールの送信元を厳格に確認する設定になっていません。<br><br>
-                これは<span class="text-white font-bold">「とりあえず誰からの手紙でも、自由遊びの会宛てならポストに入れてしまう」</span>状態に等しく、悪意ある第三者が「自由遊びの会」を名乗って偽の案内（フィッシングメール等）を送っても、ブロックする仕組みが機能しません。
+                これは<span class="text-warning font-bold">「とりあえず誰からの手紙でも、自由遊びの会宛てならポストに入れてしまう」</span>状態に等しく、悪意ある第三者が「自由遊びの会」を名乗って偽の案内を送っても、ブロックする仕組みが機能しません。
               </p>
-              <div class="bg-red-500/10 border border-red-500/30 p-5 rounded-lg">
+              <div class="bg-[#d2691e]/10 border border-[#d2691e]/30 p-5 rounded-xl">
                 <p class="text-warning text-sm mb-2 font-bold">想定されるリスク</p>
-                <ul class="list-disc pl-5 text-sm text-muted">
+                <ul class="list-disc pl-5 text-sm text-[#d2691e]/90 font-medium">
                   <li>団体名義でのなりすましメールによる、保護者からの信用低下</li>
                   <li>Gmail等のルール厳格化により、正規の案内すら「迷惑メールボックス」に捨てられてしまう問題</li>
                 </ul>
@@ -208,13 +213,13 @@
             </div>
             
             <div class="card card-highlight">
-              <h3>新しい環境での解決策</h3>
-              <p class="text-sm text-white mb-6">
+              <h3 class="!text-[#2d5a27]">新しい環境での解決策</h3>
+              <p class="text-sm text-[#2c3e2d] mb-6 leading-relaxed">
                 新しいシステムに移管する際、正規の案内だけを確実に届け、偽物は入口で弾き落とす<span class="text-highlight">「強固な連絡網（厳格なSPF/DMARC設定）」</span>を構築します。
               </p>
-              <ul class="text-sm text-muted space-y-4">
-                <li class="flex gap-3"><span class="text-highlight">✓</span> <span>怪しい送信元はシステムが自動で完全拒否</span></li>
-                <li class="flex gap-3"><span class="text-highlight">✓</span> <span>保護者の元へ確実にメールが届く高い到達率</span></li>
+              <ul class="text-sm text-muted space-y-4 font-medium">
+                <li class="flex gap-3 items-center bg-white p-3 rounded-lg border border-[rgba(45,90,39,0.1)]"><span class="text-highlight text-xl">✓</span> <span>怪しい送信元はシステムが自動で完全拒否</span></li>
+                <li class="flex gap-3 items-center bg-white p-3 rounded-lg border border-[rgba(45,90,39,0.1)]"><span class="text-highlight text-xl">✓</span> <span>保護者の元へ確実にメールが届く高い到達率</span></li>
               </ul>
             </div>
           </div>
@@ -227,24 +232,24 @@
           <h2>3. サイトの防犯設備（見えないフェンス）</h2>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="card">
+            <div class="card border-t-4 border-t-[#d2691e]">
               <h3 class="text-warning mb-4">現状：丸腰のWebサーバー</h3>
-              <p class="text-muted text-sm mb-6">
+              <p class="text-muted text-sm mb-6 leading-relaxed">
                 現在のサイトには、子どもたち（サイト訪問者）を危険から守る「見えないフェンス（セキュリティ・ヘッダー）」が設置されていません。
               </p>
-              <ul class="space-y-4 text-sm">
-                <li class="flex items-start gap-3">
-                  <span class="text-warning font-bold">✕</span>
+              <ul class="space-y-4 text-sm font-medium">
+                <li class="flex items-start gap-3 bg-[rgba(0,0,0,0.02)] p-3 rounded-lg">
+                  <span class="text-warning font-bold text-lg">✕</span>
                   <div>
-                    <span class="font-bold text-white block">強制的に安全な道を通らせる仕組みがない</span>
-                    <span class="text-muted">（通信が盗み見られるリスク）</span>
+                    <span class="font-bold text-[#2c3e2d] block">強制的に安全な道を通らせる仕組みがない</span>
+                    <span class="text-muted text-xs">（通信が盗み見られるリスク）</span>
                   </div>
                 </li>
-                <li class="flex items-start gap-3">
-                  <span class="text-warning font-bold">✕</span>
+                <li class="flex items-start gap-3 bg-[rgba(0,0,0,0.02)] p-3 rounded-lg">
+                  <span class="text-warning font-bold text-lg">✕</span>
                   <div>
-                    <span class="font-bold text-white block">外部からの異物混入を防ぐ防波堤がない</span>
-                    <span class="text-muted">（勝手に悪意あるプログラムを仕込まれるリスク）</span>
+                    <span class="font-bold text-[#2c3e2d] block">外部からの異物混入を防ぐ防波堤がない</span>
+                    <span class="text-muted text-xs">（勝手に悪意あるプログラムを仕込まれるリスク）</span>
                   </div>
                 </li>
               </ul>
@@ -252,12 +257,13 @@
             
             <div>
               <h3>次世代インフラによる自動防壁</h3>
-              <p class="text-muted text-sm mb-8">
+              <p class="text-muted text-sm mb-8 leading-relaxed">
                 現在のWordPressでこれらを手動で防ごうとすると、定期的な点検や部品交換が必要になり、スタッフの皆様にとって非常に負担が大きくなります。
               </p>
-              <div class="card card-highlight p-6">
-                <p class="text-white font-bold mb-3">【最新の安全基準を全自動で適用】</p>
-                <p class="text-sm text-muted">
+              <div class="card card-highlight p-8 relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-[#2d5a27]/10 rounded-full blur-2xl"></div>
+                <p class="text-highlight font-bold mb-3 text-lg">【最新の安全基準を全自動で適用】</p>
+                <p class="text-sm text-muted font-medium leading-relaxed">
                   私たちが提案する新しいインフラ（Vercel）では、これらの<span class="text-highlight">見えないフェンスが「建設と同時に全自動で設置」</span>されます。面倒な管理なしで、最高の安全性が保たれます。
                 </p>
               </div>
@@ -269,21 +275,21 @@
       <!-- Slide 5: The Transformation -->
       <section>
         <div class="slide-wrapper text-center">
-          <h2 class="!border-none !mb-6">4. 新しい「デジタル冒険基地」への進化</h2>
+          <h2 class="!border-none !mb-4">4. 新しい「デジタル冒険基地」への進化</h2>
           <p class="text-lg text-muted mb-12">
             システムを一新することで、運営の手間を減らし、よりワクワクする体験を提供します。
           </p>
           
           <div class="flex items-stretch justify-center gap-6 w-full">
             <!-- Before -->
-            <div class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-8 opacity-70">
-              <h3 class="!text-white !mb-6 !text-xl">ツギハギだらけの古い遊び場<br><span class="text-sm font-normal text-muted">(現在のWordPress)</span></h3>
-              <div class="rank-circle bg-rank-d w-16 h-16 text-2xl mx-auto mb-6">D</div>
-              <ul class="text-sm text-left text-muted space-y-3">
-                <li>• プラグイン（追加遊具）が多すぎて動作が重い</li>
-                <li>• ページを移動するたびに待たされる</li>
-                <li>• スタッフの管理・保守の手間（草刈り）が大変</li>
-                <li>• セキュリティ面での死角が多い</li>
+            <div class="flex-1 card bg-[#fafafa] opacity-90 border-dashed border-2">
+              <h3 class="!text-[#5c6c5d] !mb-6 !text-xl">ツギハギだらけの古い遊び場<br><span class="text-sm font-normal text-muted mt-1 block">(現在のWordPress)</span></h3>
+              <div class="rank-circle bg-rank-d w-16 h-16 text-2xl mx-auto mb-8">D</div>
+              <ul class="text-sm text-left text-muted space-y-3 font-medium">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>プラグイン（追加遊具）が多すぎて動作が重い</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>ページを移動するたびに待たされる</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>スタッフの管理・保守の手間（草刈り）が大変</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>セキュリティ面での死角が多い</li>
               </ul>
             </div>
             
@@ -291,10 +297,13 @@
             <div class="flex items-center text-highlight text-4xl font-bold">➔</div>
             
             <!-- After -->
-            <div class="flex-1 card card-highlight transform scale-105">
-              <h3 class="!mb-6 !text-xl">手入れ不要で安全な新しい遊び場<br><span class="text-sm font-normal text-muted">(Alnairが構築する新環境)</span></h3>
-              <div class="rank-circle bg-rank-s w-16 h-16 text-2xl mx-auto mb-6">S</div>
-              <ul class="text-sm text-left text-white space-y-4">
+            <div class="flex-1 card card-highlight transform scale-105 relative">
+              <div class="absolute -top-3 -right-3 bg-[#2d5a27] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                リニューアル後
+              </div>
+              <h3 class="!mb-6 !text-xl">手入れ不要で安全な新しい遊び場<br><span class="text-sm font-normal text-[#2d5a27]/70 mt-1 block">(Alnairが構築する新環境)</span></h3>
+              <div class="rank-circle bg-rank-s w-16 h-16 text-2xl mx-auto mb-8">S</div>
+              <ul class="text-sm text-left text-[#2c3e2d] space-y-4 font-bold">
                 <li class="flex items-start gap-2"><span class="text-highlight">✓</span> <span>堅牢な見えないフェンスによる高い安全性</span></li>
                 <li class="flex items-start gap-2"><span class="text-highlight">✓</span> <span>待ち時間ゼロでサクサク動く快適な操作性</span></li>
                 <li class="flex items-start gap-2"><span class="text-highlight">✓</span> <span>サーバー管理不要。自動で最新・安全な状態を維持</span></li>
@@ -308,19 +317,19 @@
       <!-- Slide 6: Conclusion -->
       <section>
         <div class="slide-wrapper" style="align-items: center; text-align: center;">
-          <h2 class="!border-none !mb-8 !text-4xl">
+          <h2 class="!border-none !mb-8 !text-5xl">
             安心して「本気の遊び」に<br>
             没頭できる環境を。
           </h2>
-          <p class="text-xl text-muted mb-16 max-w-3xl leading-relaxed">
+          <p class="text-xl text-[#2c3e2d] font-bold mb-16 max-w-3xl leading-relaxed">
             サイトの裏側（セキュリティやシステム管理）の不安は、<br>
             新しいシステムが完全に吸収します。<br><br>
             スタッフの皆様は「子どもたちの遊び場づくり」に100%集中でき、<br>
             保護者の方々には安心感を、サイトを訪れる人にはワクワクを届けます。
           </p>
           <div class="card card-highlight inline-block p-8">
-            <h3 class="!mb-2">システム・デザイン移行作業 進行中</h3>
-            <p class="text-sm text-white/70">引き続き、最高品質のWebサイト構築を進めてまいります。</p>
+            <h3 class="!mb-2 !text-2xl">システム・デザイン移行作業 進行中</h3>
+            <p class="text-sm text-muted font-bold">引き続き、最高品質のWebサイト構築を進めてまいります。</p>
           </div>
         </div>
       </section>
